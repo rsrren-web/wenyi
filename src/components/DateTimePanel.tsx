@@ -64,11 +64,24 @@ export function DateTimePanel({ compact = false }: Props) {
 
   if (compact) {
     return (
-      <div className="flex items-center justify-between px-5 py-3 border-b border-border text-sm tracking-wider text-foreground/70">
-        <span className="text-primary font-medium">{timeStr}</span>
-        <span>{solarStr}</span>
-        <span>{lunarStr}</span>
-        <span className="text-primary">{currentShichen.name} · 五行{currentShichen.element}</span>
+      <div className="border-b border-border px-4 py-3 text-foreground/70">
+        <div className="flex items-baseline justify-between gap-4">
+          <span className="text-xl font-light tracking-widest text-primary tabular-nums whitespace-nowrap">
+            {timeStr}
+          </span>
+          <span className="text-xs tracking-wide text-foreground/60 whitespace-nowrap">
+            {solarStr}
+          </span>
+        </div>
+
+        <div className="mt-2 grid grid-cols-1 gap-1.5 border-t border-border/60 pt-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-3">
+          <span className="min-w-0 text-xs tracking-wide text-foreground/60">
+            农历 · {lunarStr}
+          </span>
+          <span className="text-xs tracking-wide text-primary whitespace-nowrap">
+            {currentShichen.name} · {currentShichen.time} · {currentShichen.element}
+          </span>
+        </div>
       </div>
     );
   }
