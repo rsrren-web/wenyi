@@ -18,35 +18,35 @@ export default function Home() {
   return (
     <div className="flex-1 flex flex-col w-full min-h-[calc(100vh-57px)]">
       {/* Mobile compact datetime strip */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <DateTimePanel compact />
       </div>
 
       {/* Main layout */}
-      <div className="flex-1 flex flex-col md:flex-row w-full">
+      <div className="flex w-full flex-1 flex-col lg:flex-row">
         {/* Left: DateTime (desktop only) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="hidden md:flex md:w-[30%] items-center min-h-full"
+          className="hidden min-h-full w-[24%] items-center lg:flex"
         >
           <DateTimePanel />
         </motion.div>
 
         {/* Center: Title + Form */}
-        <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-12 md:py-0 border-r border-border/50">
+        <div className="flex w-full flex-col justify-center px-6 py-14 sm:px-10 lg:w-[52%] lg:border-r lg:border-border/50 lg:px-12 lg:py-10 xl:px-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="max-w-lg"
+            className="mx-auto w-full max-w-xl"
           >
-            <h1 className="text-6xl md:text-8xl font-light tracking-[0.2em] text-primary mb-10">
+            <h1 className="mb-10 text-center text-6xl font-light tracking-[0.2em] text-primary md:text-8xl">
               问易
             </h1>
 
-            <div className="space-y-3 mb-12 pl-3 border-l border-primary/20 py-1">
+            <div className="mx-auto mb-12 max-w-md space-y-3 border-l border-primary/20 py-1 pl-4">
               <p className="text-sm md:text-base leading-relaxed tracking-widest text-foreground/65 font-light">
                 一切有为法，如梦幻泡影。
               </p>
@@ -55,7 +55,7 @@ export default function Home() {
               </p>
             </div>
 
-            <form onSubmit={handleCast} className="space-y-5 w-full max-w-md">
+            <form onSubmit={handleCast} className="mx-auto w-full max-w-md space-y-5">
               <div className="relative">
                 <input
                   type="text"
@@ -69,7 +69,7 @@ export default function Home() {
 
               <button
                 type="submit"
-                className="px-10 py-3.5 bg-primary text-primary-foreground text-sm font-medium tracking-[0.25em] hover:bg-primary/90 transition-colors"
+                className="w-full bg-primary px-10 py-3.5 text-sm font-medium tracking-[0.25em] text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 起卦
               </button>
@@ -82,7 +82,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-full md:w-[29%] flex flex-col justify-center px-6 md:px-7 lg:px-8 py-8 md:py-0 border-t border-border md:border-t-0"
+          className="flex w-full flex-col justify-center border-t border-border px-6 py-10 sm:px-10 lg:w-[24%] lg:border-t-0 lg:px-6 lg:py-10 xl:px-8"
         >
           <div className="text-[10px] tracking-[0.35em] text-foreground/45 uppercase mb-4">
             六十四卦 · 随机探索

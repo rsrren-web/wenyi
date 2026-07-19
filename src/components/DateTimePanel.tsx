@@ -87,8 +87,8 @@ export function DateTimePanel({ compact = false }: Props) {
   }
 
   return (
-    <div className="h-full flex flex-col justify-center px-10 border-r border-border">
-      <div className="space-y-8">
+    <div className="h-full w-full border-r border-border px-6 py-10 xl:px-10">
+      <div className="flex h-full flex-col justify-center space-y-7">
 
         {/* 阳历 + 时间 */}
         <div className="space-y-2">
