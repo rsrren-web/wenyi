@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { YaoLineDiagram } from "@/components/YaoLineDiagram";
 import { RelatedHexagramSection } from "@/components/RelatedHexagramSection";
 import { BackToTop } from "@/components/BackToTop";
+import { ReadingNav } from "@/components/ReadingNav";
 import { HexagramImage } from "@/components/HexagramImage";
 import { YaoLinesDetail } from "@/components/YaoLinesDetail";
 
@@ -102,7 +103,7 @@ export default function HexagramDetail() {
         {/* ══════════════════════════════════════════
             § 1  情势研判 + 宜忌
         ══════════════════════════════════════════ */}
-        <div className="space-y-6">
+        <div id="situation" className="scroll-mt-24 space-y-6">
           <SectionTitle label="情势研判" />
           <p className="text-lg leading-loose text-foreground/90 tracking-wide">
             {hexagram.duanyiTianji}
@@ -128,7 +129,7 @@ export default function HexagramDetail() {
         {/* ══════════════════════════════════════════
             § 2  经典文本
         ══════════════════════════════════════════ */}
-        <div className="space-y-10">
+        <div id="classics" className="scroll-mt-24 space-y-10">
           <SectionTitle label="经典文本" />
           <div className="space-y-8">
             <div>
@@ -162,7 +163,7 @@ export default function HexagramDetail() {
         {/* ══════════════════════════════════════════
             § 3  综合解读
         ══════════════════════════════════════════ */}
-        <div className="space-y-4">
+        <div id="interpretation" className="scroll-mt-24 space-y-4">
           <SectionTitle label="综合解读" />
           <p className="text-base leading-loose text-foreground/80 tracking-wide">
             {hexagram.explanation}
@@ -173,7 +174,7 @@ export default function HexagramDetail() {
             § 4  图像专区  ——  全宽双列
         ══════════════════════════════════════════ */}
         {hasImageSection && (
-          <div className="space-y-6">
+          <div id="image" className="scroll-mt-24 space-y-6">
             <SectionTitle label="图像参考" />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-border">
 
@@ -227,7 +228,7 @@ export default function HexagramDetail() {
         {/* ══════════════════════════════════════════
             § 5  爻位详表
         ══════════════════════════════════════════ */}
-        <div className="space-y-4">
+        <div id="lines" className="scroll-mt-24 space-y-4">
           <SectionTitle label="爻位详表" />
           <YaoLinesDetail lines={hexagram.lines} />
         </div>
@@ -235,11 +236,13 @@ export default function HexagramDetail() {
         {/* ══════════════════════════════════════════
             § 6  关联卦象
         ══════════════════════════════════════════ */}
-        <RelatedHexagramSection
-          mutual={hexagram.relatedHexagrams.mutual}
-          opposite={hexagram.relatedHexagrams.opposite}
-          reversed={hexagram.relatedHexagrams.reversed}
-        />
+        <div id="related" className="scroll-mt-24">
+          <RelatedHexagramSection
+            mutual={hexagram.relatedHexagrams.mutual}
+            opposite={hexagram.relatedHexagrams.opposite}
+            reversed={hexagram.relatedHexagrams.reversed}
+          />
+        </div>
 
         {/* ══════════════════════════════════════════
             导航
@@ -268,6 +271,14 @@ export default function HexagramDetail() {
           </div>
         </div>
       </motion.div>
+      <ReadingNav items={[
+        { id: "situation", label: "情势研判" },
+        { id: "classics", label: "经典文本" },
+        { id: "interpretation", label: "综合解读" },
+        { id: "image", label: "图像" },
+        { id: "lines", label: "爻位" },
+        { id: "related", label: "关联卦象" },
+      ]} />
       <BackToTop />
     </div>
   );
