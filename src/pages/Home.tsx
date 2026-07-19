@@ -46,7 +46,7 @@ export default function Home() {
               问易
             </h1>
 
-            <div className="mx-auto mb-12 max-w-md space-y-3 border-l border-primary/20 py-1 pl-4">
+            <div className="mx-auto mb-12 max-w-md space-y-3 py-1 text-center">
               <p className="text-sm md:text-base leading-relaxed tracking-widest text-foreground/65 font-light">
                 一切有为法，如梦幻泡影。
               </p>
