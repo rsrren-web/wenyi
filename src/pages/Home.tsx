@@ -29,7 +29,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="hidden md:flex md:w-[36%] items-center min-h-full"
+          className="hidden md:flex md:w-[45%] items-center min-h-full"
         >
           <DateTimePanel />
         </motion.div>

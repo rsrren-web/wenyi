@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useGetHexagram } from "@/lib/local-api";
-import { Link } from "wouter";
 import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import { YaoLineDiagram } from "./YaoLineDiagram";
 
@@ -129,15 +128,15 @@ function RelatedCard({
               )}
 
               <div className="pt-2">
-                <Link
-                  href={`/hexagrams/${hexRef.id}`}
+                <a
+                  href={`${import.meta.env.BASE_URL}hexagrams/${hexRef.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <span className="text-xs text-primary/50 hover:text-primary tracking-widest transition-colors">
                     查看完整卦详情 →
                   </span>
-                </Link>
+                </a>
               </div>
             </div>
           )}

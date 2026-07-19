@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "vite --configLoader runner", "build": "vite build --configLoader runner", "preview": "vite preview" },
+  "scripts": {
+    "dev": "vite --configLoader runner",
+    "build": "vite build --configLoader runner",
+    "build:pages": "pnpm build && node scripts/prepare-pages.mjs",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
