@@ -29,7 +29,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="hidden md:flex md:w-[28%] items-center min-h-full"
+          className="hidden md:flex md:w-[32%] items-center min-h-full"
         >
           <DateTimePanel />
         </motion.div>
@@ -82,7 +82,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-full md:w-[33%] flex flex-col justify-center px-6 md:px-8 py-8 md:py-0 border-t border-border md:border-t-0"
+          className="w-full md:w-[31%] flex flex-col justify-center px-6 md:px-8 py-8 md:py-0 border-t border-border md:border-t-0"
         >
           <div className="text-[10px] tracking-[0.35em] text-foreground/45 uppercase mb-4">
             六十四卦 · 随机探索

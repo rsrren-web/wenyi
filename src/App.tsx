@@ -1,5 +1,6 @@
 import NotFound from '@/pages/not-found';
-import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { useEffect } from 'react';
+import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 
 import { Navbar } from '@/components/Navbar';
 import Home from '@/pages/Home';
@@ -9,9 +10,18 @@ import HexagramDetail from '@/pages/HexagramDetail';
 import IChing from '@/pages/IChing';
 import About from '@/pages/About';
 
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location]);
+  return null;
+}
+
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <Navbar />
       <main className="flex-1 flex flex-col">
         <Switch>

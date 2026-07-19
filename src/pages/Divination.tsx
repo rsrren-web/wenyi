@@ -311,14 +311,9 @@ export default function Divination() {
           </div>
         </div>
 
-        {/* ══════════════════════════════════════════
-            § 1  情势研判
-        ══════════════════════════════════════════ */}
+        {/* 宜忌 */}
         <div className="space-y-6">
-          <SectionTitle label="情势研判" />
-          <p className="text-lg leading-loose text-foreground/90 tracking-wide">
-            {hexagram.duanyiTianji}
-          </p>
+          <SectionTitle label="宜 · 忌" />
           {(ext.advice || ext.warning) && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
               {ext.advice && (
@@ -338,41 +333,7 @@ export default function Divination() {
         </div>
 
         {/* ══════════════════════════════════════════
-            § 2  经典文本
-        ══════════════════════════════════════════ */}
-        <div className="space-y-10">
-          <SectionTitle label="经典文本" />
-          <div className="space-y-8">
-            <div>
-              <FieldLabel label="卦辞" />
-              <p className="text-xl font-light leading-relaxed text-white tracking-wider mt-2">
-                {hexagram.guaci}
-              </p>
-            </div>
-            <div>
-              <FieldLabel label="象辞" />
-              <p className="text-lg leading-relaxed text-foreground/90 tracking-wide mt-2">
-                {hexagram.xiangci}
-              </p>
-            </div>
-            {hexagram.poem && (
-              <div className="py-5 border-y border-border/50 text-center space-y-1.5">
-                {hexagram.poem.split('\n').map((line, i) => (
-                  <p key={i} className="text-base tracking-[0.45em] text-foreground/70">{line}</p>
-                ))}
-              </div>
-            )}
-            <div className="p-5 border border-border bg-card">
-              <FieldLabel label="民间断语" />
-              <p className="text-base leading-relaxed text-foreground/85 tracking-wide mt-2">
-                {hexagram.folkJudgment}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════
-            § 3  深度解读
+            深度解读
         ══════════════════════════════════════════ */}
         <div className="space-y-10">
           <SectionTitle label="深度解读" />

@@ -52,7 +52,7 @@ export function QuoteCarousel() {
       return false;
     }).slice(0, 8);
     setSearchResults(results);
-    setShowResults(results.length > 0);
+    setShowResults(true);
   }, [searchQuery, hexagrams]);
 
   const handleSearchSelect = useCallback((id: number) => {
@@ -73,7 +73,7 @@ export function QuoteCarousel() {
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            onFocus={() => searchResults.length > 0 && setShowResults(true)}
+            onFocus={() => searchQuery.trim() && setShowResults(true)}
             onBlur={() => setTimeout(() => setShowResults(false), 150)}
             placeholder="搜索卦名、关键词或序号…"
             className="w-full bg-card border border-border pl-9 pr-8 py-2.5 text-xs tracking-wider text-foreground/80 placeholder:text-foreground/35 focus:outline-none focus:border-primary/50 transition-colors"
@@ -91,7 +91,11 @@ export function QuoteCarousel() {
         {/* Dropdown results */}
         {showResults && (
           <div className="absolute top-full left-0 right-0 z-50 bg-card border border-border mt-px shadow-2xl max-h-64 overflow-y-auto">
-            {searchResults.map(h => (
+            {searchResults.length === 0 ? (
+              <div className="px-4 py-5 text-center text-xs tracking-wider text-foreground/50">
+                无法找到你所查询的内容
+              </div>
+            ) : searchResults.map(h => (
               <button
                 key={h.id}
                 onMouseDown={() => handleSearchSelect(h.id)}
