@@ -129,7 +129,11 @@ function RelatedCard({
               )}
 
               <div className="pt-2">
-                <Link href={`/hexagrams/${hexRef.id}`}>
+                <Link
+                  href={`/hexagrams/${hexRef.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <span className="text-xs text-primary/50 hover:text-primary tracking-widest transition-colors">
                     查看完整卦详情 →
                   </span>

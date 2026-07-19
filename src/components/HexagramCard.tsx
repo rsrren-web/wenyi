@@ -14,11 +14,11 @@ interface HexagramBriefExtended {
 
 export function HexagramCard({ hexagram }: { hexagram: HexagramBriefExtended }) {
   return (
-    <Link href={`/hexagrams/${hexagram.id}`}>
+    <Link href={`/hexagrams/${hexagram.id}`} className="block h-full">
       <motion.div
         whileHover={{ y: -2 }}
         transition={{ duration: 0.2 }}
-        className="group relative flex flex-col p-5 border border-border bg-card hover:border-primary/30 transition-all duration-300 cursor-pointer overflow-hidden min-h-[220px]"
+        className="group relative flex h-full min-h-[240px] flex-col overflow-hidden border border-border bg-card p-5 cursor-pointer transition-all duration-300 hover:border-primary/30"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
