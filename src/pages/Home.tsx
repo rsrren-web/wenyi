@@ -23,19 +23,19 @@ export default function Home() {
       </div>
 
       {/* Main layout */}
-      <div className="flex w-full flex-1 flex-col lg:flex-row">
+      <div className="flex w-full flex-1 flex-col lg:grid lg:grid-cols-[24%_52%_24%] lg:items-stretch">
         {/* Left: DateTime (desktop only) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="hidden min-h-full w-[24%] items-center lg:flex"
+          className="hidden min-h-full items-center lg:flex"
         >
           <DateTimePanel />
         </motion.div>
 
         {/* Center: Title + Form */}
-        <div className="flex w-full flex-col justify-center px-6 py-14 sm:px-10 lg:w-[52%] lg:border-r lg:border-border/50 lg:px-12 lg:py-10 xl:px-20">
+        <div className="flex w-full flex-col justify-center px-6 py-14 sm:px-10 lg:border-r lg:border-border/50 lg:px-12 lg:py-10 xl:px-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex w-full flex-col justify-center border-t border-border px-6 py-10 sm:px-10 lg:w-[24%] lg:border-t-0 lg:px-6 lg:py-10 xl:px-8"
+          className="flex w-full flex-col justify-center border-t border-border px-6 py-10 sm:px-10 lg:border-t-0 lg:px-6 lg:py-10 xl:px-8"
         >
           <div className="text-[10px] tracking-[0.35em] text-foreground/45 uppercase mb-4">
             六十四卦 · 随机探索

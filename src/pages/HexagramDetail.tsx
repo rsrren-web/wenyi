@@ -5,6 +5,9 @@ import { Loader2, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { YaoLineDiagram } from "@/components/YaoLineDiagram";
 import { RelatedHexagramSection } from "@/components/RelatedHexagramSection";
+import { BackToTop } from "@/components/BackToTop";
+import { HexagramImage } from "@/components/HexagramImage";
+import { YaoLinesDetail } from "@/components/YaoLinesDetail";
 
 export default function HexagramDetail() {
   const [, params] = useRoute("/hexagrams/:id");
@@ -180,11 +183,10 @@ export default function HexagramDetail() {
                   <div className="text-[10px] tracking-[0.45em] text-foreground/50 uppercase mb-5 self-start">
                     《天纪》卦图
                   </div>
-                  <img
+                  <HexagramImage
                     src={imgSrc}
                     alt={`${hexagram.name}卦图`}
                     onError={() => setImageError(true)}
-                    className="w-full max-w-[260px] border border-border/30 opacity-90"
                   />
                 </div>
               )}
@@ -227,32 +229,7 @@ export default function HexagramDetail() {
         ══════════════════════════════════════════ */}
         <div className="space-y-4">
           <SectionTitle label="爻位详表" />
-          <div className="overflow-x-auto border border-border">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-border text-xs tracking-[0.3em] text-foreground/55 uppercase">
-                  <th className="py-3 px-4 font-normal">爻位</th>
-                  <th className="py-3 px-4 font-normal">阴阳</th>
-                  <th className="py-3 px-4 font-normal">世/应</th>
-                  <th className="py-3 px-4 font-normal w-1/3">爻辞</th>
-                  <th className="py-3 px-4 font-normal w-1/3">白话解</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {[...hexagram.lines].sort((a, b) => b.position - a.position).map(line => (
-                  <tr key={line.position} className="hover:bg-card transition-colors">
-                    <td className="py-4 px-4 text-base tracking-wider text-white">{line.name}</td>
-                    <td className="py-4 px-4 text-sm text-foreground/60">{line.isYang ? '阳' : '阴'}</td>
-                    <td className="py-4 px-4 text-sm text-primary/80 tracking-widest font-medium">
-                      {line.isShiYao ? '世' : line.isYingYao ? '应' : ''}
-                    </td>
-                    <td className="py-4 px-4 text-base leading-relaxed text-foreground/90">{line.text}</td>
-                    <td className="py-4 px-4 text-sm leading-relaxed text-foreground/75">{line.explanation}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <YaoLinesDetail lines={hexagram.lines} />
         </div>
 
         {/* ══════════════════════════════════════════
@@ -291,6 +268,7 @@ export default function HexagramDetail() {
           </div>
         </div>
       </motion.div>
+      <BackToTop />
     </div>
   );
 }

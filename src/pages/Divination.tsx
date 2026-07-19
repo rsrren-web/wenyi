@@ -4,6 +4,10 @@ import { useCastDivination } from "@/lib/local-api";
 import { motion } from "framer-motion";
 import { YaoLineDiagram } from "@/components/YaoLineDiagram";
 import { RelatedHexagramSection } from "@/components/RelatedHexagramSection";
+import { BackToTop } from "@/components/BackToTop";
+import { ReadingNav } from "@/components/ReadingNav";
+import { HexagramImage } from "@/components/HexagramImage";
+import { YaoLinesDetail } from "@/components/YaoLinesDetail";
 import { Loader2, ImageDown } from "lucide-react";
 
 /* ── Canvas text-wrap helper ─────────────────────────────────── */
@@ -188,6 +192,7 @@ export default function Divination() {
   const { mutate: castDivination, data: result, isPending, error } = useCastDivination();
   const [imageError, setImageError] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
 
   useEffect(() => {
     const question = sessionStorage.getItem("divination_question");
@@ -223,6 +228,8 @@ export default function Divination() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      setDownloaded(true);
+      window.setTimeout(() => setDownloaded(false), 2400);
     } finally {
       setGenerating(false);
     }
@@ -312,7 +319,7 @@ export default function Divination() {
         </div>
 
         {/* 宜忌 */}
-        <div className="space-y-6">
+        <div id="advice" className="scroll-mt-24 space-y-6">
           <SectionTitle label="宜 · 忌" />
           {(ext.advice || ext.warning) && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
@@ -335,7 +342,7 @@ export default function Divination() {
         {/* ══════════════════════════════════════════
             深度解读
         ══════════════════════════════════════════ */}
-        <div className="space-y-10">
+        <div id="interpretation" className="scroll-mt-24 space-y-10">
           <SectionTitle label="深度解读" />
           <div>
             <FieldLabel label="综合解读" />
@@ -366,7 +373,7 @@ export default function Divination() {
             § 4  图像专区
         ══════════════════════════════════════════ */}
         {hasImageSection && (
-          <div className="space-y-6">
+          <div id="image" className="scroll-mt-24 space-y-6">
             <SectionTitle label="图像参考" />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-border">
               {hasImage && (
@@ -374,11 +381,10 @@ export default function Divination() {
                   <div className="text-[10px] tracking-[0.45em] text-foreground/50 uppercase mb-5 self-start">
                     《天纪》卦图
                   </div>
-                  <img
+                  <HexagramImage
                     src={imgSrc}
                     alt={`${hexagram.name}卦图`}
                     onError={() => setImageError(true)}
-                    className="w-full max-w-[260px] border border-border/30 opacity-90"
                   />
                 </div>
               )}
@@ -417,44 +423,21 @@ export default function Divination() {
         {/* ══════════════════════════════════════════
             § 5  爻位详表
         ══════════════════════════════════════════ */}
-        <div className="space-y-4">
+        <div id="lines" className="scroll-mt-24 space-y-4">
           <SectionTitle label="爻位详表" />
-          <div className="overflow-x-auto border border-border">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-border text-xs tracking-[0.3em] text-foreground/55 uppercase">
-                  <th className="py-3 px-4 font-normal">爻位</th>
-                  <th className="py-3 px-4 font-normal">阴阳</th>
-                  <th className="py-3 px-4 font-normal">世/应</th>
-                  <th className="py-3 px-4 font-normal w-1/3">爻辞</th>
-                  <th className="py-3 px-4 font-normal w-1/3">白话解</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {[...hexagram.lines].sort((a, b) => b.position - a.position).map(line => (
-                  <tr key={line.position} className="hover:bg-card transition-colors">
-                    <td className="py-4 px-4 text-base tracking-wider text-white">{line.name}</td>
-                    <td className="py-4 px-4 text-sm text-foreground/60">{line.isYang ? '阳' : '阴'}</td>
-                    <td className="py-4 px-4 text-sm text-primary/80 tracking-widest font-medium">
-                      {line.isShiYao ? '世' : line.isYingYao ? '应' : ''}
-                    </td>
-                    <td className="py-4 px-4 text-base leading-relaxed text-foreground/90">{line.text}</td>
-                    <td className="py-4 px-4 text-sm leading-relaxed text-foreground/75">{line.explanation}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <YaoLinesDetail lines={hexagram.lines} />
         </div>
 
         {/* ══════════════════════════════════════════
             § 6  关联卦象
         ══════════════════════════════════════════ */}
-        <RelatedHexagramSection
-          mutual={hexagram.relatedHexagrams.mutual}
-          opposite={hexagram.relatedHexagrams.opposite}
-          reversed={hexagram.relatedHexagrams.reversed}
-        />
+        <div id="related" className="scroll-mt-24">
+          <RelatedHexagramSection
+            mutual={hexagram.relatedHexagrams.mutual}
+            opposite={hexagram.relatedHexagrams.opposite}
+            reversed={hexagram.relatedHexagrams.reversed}
+          />
+        </div>
 
         {/* ══════════════════════════════════════════
             操作区
@@ -469,7 +452,7 @@ export default function Divination() {
               ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
               : <ImageDown className="w-3.5 h-3.5" />
             }
-            {generating ? '生成中…' : '生成图片'}
+            {generating ? '生成中…' : downloaded ? '已生成并下载' : '生成图片'}
           </button>
           <Link href="/">
             <button className="px-8 py-3 border border-border text-foreground/65 text-sm tracking-[0.25em] hover:border-foreground/40 hover:text-foreground/90 transition-colors">
@@ -478,6 +461,14 @@ export default function Divination() {
           </Link>
         </div>
       </motion.div>
+      <ReadingNav items={[
+        { id: "advice", label: "宜忌" },
+        { id: "interpretation", label: "深度解读" },
+        { id: "image", label: "图像" },
+        { id: "lines", label: "爻位" },
+        { id: "related", label: "关联卦象" },
+      ]} />
+      <BackToTop />
     </div>
   );
 }
