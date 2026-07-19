@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { getAllHexagrams, getHexagramById, type ProcessedHexagram } from "@/data/hexagrams";
 
 export function useListHexagrams() {
@@ -25,7 +25,7 @@ export function useCastDivination() {
   const [data, setData] = useState<{question: string; hexagram: ProcessedHexagram; interpretation: string}>();
   const [isPending, setPending] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const mutate = ({ data: input }: { data: { question: string } }) => {
+  const mutate = useCallback(({ data: input }: { data: { question: string } }) => {
     setPending(true);
     setError(null);
     try {
@@ -37,6 +37,6 @@ export function useCastDivination() {
     } finally {
       setPending(false);
     }
-  };
+  }, []);
   return { mutate, data, isPending, error };
 }
