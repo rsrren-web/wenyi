@@ -91,7 +91,7 @@ export function Navbar() {
 
           <div className="flex justify-center border border-border bg-white p-2">
             <img
-              src={`${import.meta.env.BASE_URL}wechat-support.jpg`}
+              src={`${import.meta.env.BASE_URL}wechat-support-v2.jpg`}
               alt="微信支付随缘随喜二维码"
               className="max-h-[62vh] w-full object-contain"
             />
