@@ -140,6 +140,39 @@
     @apply font-sans antialiased text-foreground;
     background: #000000;
     min-height: 100dvh;
+    line-height: 1.65;
+  }
+}
+
+/* Readability floor
+   Preserve the visual hierarchy while preventing low-opacity text from
+   disappearing against the pure-black background. */
+@layer utilities {
+  .text-foreground\/15 { color: hsl(var(--foreground) / 0.38) !important; }
+  .text-foreground\/25 { color: hsl(var(--foreground) / 0.48) !important; }
+  .text-foreground\/30 { color: hsl(var(--foreground) / 0.52) !important; }
+  .text-foreground\/35 { color: hsl(var(--foreground) / 0.58) !important; }
+  .text-foreground\/40 { color: hsl(var(--foreground) / 0.63) !important; }
+  .text-foreground\/45 { color: hsl(var(--foreground) / 0.68) !important; }
+  .text-foreground\/50 { color: hsl(var(--foreground) / 0.72) !important; }
+  .text-foreground\/55 { color: hsl(var(--foreground) / 0.76) !important; }
+  .text-foreground\/60 { color: hsl(var(--foreground) / 0.80) !important; }
+  .text-foreground\/65 { color: hsl(var(--foreground) / 0.84) !important; }
+  .text-foreground\/70 { color: hsl(var(--foreground) / 0.86) !important; }
+
+  .text-primary\/40 { color: hsl(var(--primary) / 0.66) !important; }
+  .text-primary\/50 { color: hsl(var(--primary) / 0.74) !important; }
+  .text-primary\/60 { color: hsl(var(--primary) / 0.82) !important; }
+
+  .placeholder\:text-foreground\/35::placeholder {
+    color: hsl(var(--foreground) / 0.55) !important;
+  }
+  .placeholder\:text-foreground\/40::placeholder {
+    color: hsl(var(--foreground) / 0.60) !important;
+  }
+
+  .text-\[10px\] {
+    font-size: 11px !important;
   }
 }
 
