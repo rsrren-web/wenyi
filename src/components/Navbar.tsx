@@ -86,7 +86,7 @@ export function Navbar() {
 
           <div className="mb-5 pr-12">
             <div id="support-title" className="text-xl font-light tracking-[0.2em] text-white">随缘随喜</div>
-            <p className="mt-2 text-sm leading-relaxed text-foreground/75">若此站于您有所助益，可随缘支持。量力而行，心意已足。</p>
+            <p className="mt-2 whitespace-nowrap text-xs text-foreground/75 sm:text-sm">随缘支持，量力而行，心意已足。</p>
           </div>
 
           <div className="flex justify-center border border-border bg-white p-2">
