@@ -11,14 +11,12 @@ export function useGetHexagram(id: number) {
   return { data, isLoading: false, error: id > 0 && !data ? new Error("卦象不存在") : null };
 }
 
-function interpretation(question: string, h: ProcessedHexagram) {
+function interpretation(h: ProcessedHexagram) {
   return [
-    "【本卦解读】", "", `您所问之事：「${question}」`, "",
-    `天机示以第 ${h.id} 卦——${h.symbol} ${h.name}卦（${h.coreMeaning}）`, "",
-    `【卦辞】\n${h.guaci}`, "", `【象辞】\n${h.xiangci}`, "",
-    `【情势研判】\n${h.duanyiTianji}`, "", `【综合指引】\n${h.explanation}`, "",
-    `宜：${h.advice}`, `忌：${h.warning}`,
-  ].join("\n");
+    `【卦辞】\n${h.guaci}`,
+    `【象辞】\n${h.xiangci}`,
+    h.duanyiTianji && `【情势研判】\n${h.duanyiTianji}`,
+  ].filter(Boolean).join("\n\n");
 }
 
 export function useCastDivination() {
@@ -31,7 +29,7 @@ export function useCastDivination() {
     try {
       const all = getAllHexagrams();
       const hexagram = all[Math.floor(Math.random() * all.length)];
-      setData({ question: input.question.trim(), hexagram, interpretation: interpretation(input.question.trim(), hexagram) });
+      setData({ question: input.question.trim(), hexagram, interpretation: interpretation(hexagram) });
     } catch (cause) {
       setError(cause instanceof Error ? cause : new Error("起卦失败"));
     } finally {

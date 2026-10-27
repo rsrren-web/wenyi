@@ -13,6 +13,7 @@ interface YaoLine {
 
 export function YaoLinesDetail({ lines }: { lines: YaoLine[] }) {
   const ordered = [...lines].sort((a, b) => b.position - a.position);
+  const hasExplanations = ordered.some(line => line.explanation.trim());
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
@@ -31,7 +32,7 @@ export function YaoLinesDetail({ lines }: { lines: YaoLine[] }) {
               {open && (
                 <div className="space-y-4 border-t border-border px-4 py-5">
                   <div><div className="mb-2 text-[10px] tracking-[0.3em] text-primary/55">爻辞</div><p className="text-base leading-relaxed text-foreground/90">{line.text}</p></div>
-                  <div><div className="mb-2 text-[10px] tracking-[0.3em] text-foreground/40">白话解</div><p className="text-sm leading-relaxed text-foreground/70">{line.explanation}</p></div>
+                  {line.explanation && <div><div className="mb-2 text-[10px] tracking-[0.3em] text-foreground/40">白话解</div><p className="text-sm leading-relaxed text-foreground/70">{line.explanation}</p></div>}
                 </div>
               )}
             </div>
@@ -41,8 +42,8 @@ export function YaoLinesDetail({ lines }: { lines: YaoLine[] }) {
 
       <div className="hidden overflow-x-auto border border-border md:block">
         <table className="w-full border-collapse text-left">
-          <thead><tr className="border-b border-border text-xs uppercase tracking-[0.3em] text-foreground/55"><th className="px-4 py-3 font-normal">爻位</th><th className="px-4 py-3 font-normal">阴阳</th><th className="px-4 py-3 font-normal">世/应</th><th className="w-1/3 px-4 py-3 font-normal">爻辞</th><th className="w-1/3 px-4 py-3 font-normal">白话解</th></tr></thead>
-          <tbody className="divide-y divide-border">{ordered.map(line => <tr key={line.position} className="transition-colors hover:bg-card"><td className="px-4 py-4 text-base tracking-wider text-white">{line.name}</td><td className="px-4 py-4 text-sm text-foreground/60">{line.isYang ? "阳" : "阴"}</td><td className="px-4 py-4 text-sm font-medium tracking-widest text-primary/80">{line.isShiYao ? "世" : line.isYingYao ? "应" : ""}</td><td className="px-4 py-4 text-base leading-relaxed text-foreground/90">{line.text}</td><td className="px-4 py-4 text-sm leading-relaxed text-foreground/75">{line.explanation}</td></tr>)}</tbody>
+          <thead><tr className="border-b border-border text-xs uppercase tracking-[0.3em] text-foreground/55"><th className="px-4 py-3 font-normal">爻位</th><th className="px-4 py-3 font-normal">阴阳</th><th className="px-4 py-3 font-normal">世/应</th><th className={`px-4 py-3 font-normal ${hasExplanations ? 'w-1/3' : 'w-1/2'}`}>爻辞</th>{hasExplanations && <th className="w-1/3 px-4 py-3 font-normal">白话解</th>}</tr></thead>
+          <tbody className="divide-y divide-border">{ordered.map(line => <tr key={line.position} className="transition-colors hover:bg-card"><td className="px-4 py-4 text-base tracking-wider text-white">{line.name}</td><td className="px-4 py-4 text-sm text-foreground/60">{line.isYang ? "阳" : "阴"}</td><td className="px-4 py-4 text-sm font-medium tracking-widest text-primary/80">{line.isShiYao ? "世" : line.isYingYao ? "应" : ""}</td><td className="px-4 py-4 text-base leading-relaxed text-foreground/90">{line.text}</td>{hasExplanations && <td className="px-4 py-4 text-sm leading-relaxed text-foreground/75">{line.explanation || '—'}</td>}</tr>)}</tbody>
         </table>
       </div>
     </>

@@ -42,6 +42,7 @@ async function generateShareCard(params: {
   coreMeaning?: string;
   question: string;
   duanyiTianji: string;
+  judgmentLabel: string;
   advice?: string;
   warning?: string;
 }): Promise<string> {
@@ -127,7 +128,7 @@ async function generateShareCard(params: {
   /* ── 情势研判 ──────────────────────────────────────── */
   ctx.font = `14px ${cjk}`;
   ctx.fillStyle = 'rgba(162,196,221,0.70)';
-  ctx.fillText('情  势  研  判', PAD, y);
+  ctx.fillText(params.judgmentLabel, PAD, y);
   y += 30;
 
   ctx.font = `22px ${cjk}`;
@@ -217,7 +218,8 @@ export default function Divination() {
         palaceLevel: hexagram.palaceLevel,
         coreMeaning: ext.coreMeaning,
         question,
-        duanyiTianji: hexagram.duanyiTianji,
+        duanyiTianji: hexagram.duanyiTianji || hexagram.guaci,
+        judgmentLabel: hexagram.duanyiTianji ? '情  势  研  判' : '卦  辞',
         advice: ext.advice,
         warning: ext.warning,
       });
@@ -344,12 +346,12 @@ export default function Divination() {
         ══════════════════════════════════════════ */}
         <div id="interpretation" className="scroll-mt-24 space-y-10">
           <SectionTitle label="深度解读" />
-          <div>
+          {hexagram.explanation && <div>
             <FieldLabel label="综合解读" />
             <p className="text-base leading-loose text-foreground/80 tracking-wide mt-3">
               {hexagram.explanation}
             </p>
-          </div>
+          </div>}
           <div className="border border-border bg-card p-7">
             <FieldLabel label="本卦解读" />
             <div className="mt-5 space-y-4 text-base leading-loose text-foreground/80 font-light">
