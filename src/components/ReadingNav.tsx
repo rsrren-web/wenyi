@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 interface ReadingNavItem {
   id: string;
   label: string;
@@ -8,11 +10,12 @@ export function ReadingNav({ items }: { items: ReadingNavItem[] }) {
   const itemKey = items.map(item => item.id).join("|");
 
   useEffect(() => {
+    const ids = itemKey.split('|').filter(Boolean);
     const update = () => {
-      const current = [...items]
+      const current = [...ids]
         .reverse()
-        .find(item => (document.getElementById(item.id)?.getBoundingClientRect().top ?? Infinity) <= 180);
-      setActive(current?.id ?? items[0]?.id ?? "");
+        .find(id => (document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= 180);
+      setActive(current ?? ids[0] ?? "");
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -51,4 +54,3 @@ export function ReadingNav({ items }: { items: ReadingNavItem[] }) {
     </nav>
   );
 }
-import { useEffect, useState } from "react";

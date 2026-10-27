@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Maximize2, X } from "lucide-react";
 
 export function HexagramImage({ src, alt, onError }: { src: string; alt: string; onError: () => void }) {
   const [loaded, setLoaded] = useState(false);
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (!open || !dialogRef.current) return;
+    const dialog = dialogRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialog.showModal();
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
 
   return (
     <>
@@ -28,13 +42,13 @@ export function HexagramImage({ src, alt, onError }: { src: string; alt: string;
         )}
       </button>
 
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-5" role="dialog" aria-modal="true" aria-label={alt} onClick={() => setOpen(false)}>
-          <button type="button" aria-label="关闭图片" onClick={() => setOpen(false)} className="absolute right-5 top-5 grid h-10 w-10 place-items-center border border-border text-foreground/60 hover:text-primary">
+      {open && createPortal(
+        <dialog ref={dialogRef} className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none items-center justify-center border-0 bg-black/95 p-5 open:flex" aria-label={alt} onCancel={() => setOpen(false)} onClose={() => setOpen(false)} onClick={event => { if (event.target === event.currentTarget) setOpen(false); }}>
+          <button type="button" autoFocus aria-label="关闭图片" onClick={() => setOpen(false)} className="absolute right-5 top-5 grid h-10 w-10 place-items-center border border-border text-foreground/60 hover:text-primary">
             <X className="h-5 w-5" />
           </button>
           <img src={src} alt={alt} className="max-h-[88vh] max-w-[92vw] object-contain" onClick={event => event.stopPropagation()} />
-        </div>
+        </dialog>, document.body
       )}
     </>
   );

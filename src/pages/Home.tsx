@@ -1,18 +1,33 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DateTimePanel } from "@/components/DateTimePanel";
 import { QuoteCarousel } from "@/components/QuoteCarousel";
 import { motion } from "framer-motion";
+import { getAllHexagrams } from "@/data/hexagrams";
+import { createDivinationRecord, saveDivinationRecord } from "@/lib/divination-record";
 
 export default function Home() {
   const [, setLocation] = useLocation();
   const [question, setQuestion] = useState("");
+  const [castError, setCastError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const submittingRef = useRef(false);
 
   const handleCast = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!question.trim()) return;
-    sessionStorage.setItem("divination_question", question.trim());
-    setLocation("/divination");
+    if (!question.trim() || submittingRef.current) return;
+    submittingRef.current = true;
+    setSubmitting(true);
+    setCastError("");
+    try {
+      const record = createDivinationRecord(question, getAllHexagrams().map(h => h.id));
+      saveDivinationRecord(window.sessionStorage, record);
+      setLocation("/divination");
+    } catch {
+      setCastError("暂时无法保存本次起卦，请允许浏览器保存本站数据后重试。");
+      submittingRef.current = false;
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -69,10 +84,12 @@ export default function Home() {
 
               <button
                 type="submit"
-                className="w-full bg-primary px-10 py-3.5 text-sm font-medium tracking-[0.25em] text-primary-foreground transition-colors hover:bg-primary/90"
+                disabled={submitting}
+                className="w-full bg-primary px-10 py-3.5 text-sm font-medium tracking-[0.25em] text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
               >
-                起卦
+                {submitting ? '正在起卦…' : '起卦'}
               </button>
+              {castError && <p role="alert" className="text-sm leading-relaxed text-primary">{castError}</p>}
             </form>
           </motion.div>
         </div>

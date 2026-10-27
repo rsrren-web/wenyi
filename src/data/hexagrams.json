@@ -620,7 +620,7 @@
       "lines": [
         {
           "position": 1,
-          "positionName": "九二",
+          "positionName": "初六",
           "yinYang": "阴",
           "symbol": "⚋",
           "isShi": false,
@@ -628,7 +628,7 @@
         },
         {
           "position": 2,
-          "positionName": "六三",
+          "positionName": "九二",
           "yinYang": "阳",
           "symbol": "⚊",
           "isShi": false,
@@ -636,7 +636,7 @@
         },
         {
           "position": 3,
-          "positionName": "六四",
+          "positionName": "六三",
           "yinYang": "阴",
           "symbol": "⚋",
           "isShi": false,
@@ -644,7 +644,7 @@
         },
         {
           "position": 4,
-          "positionName": "六五",
+          "positionName": "六四",
           "yinYang": "阴",
           "symbol": "⚋",
           "isShi": true,
@@ -652,7 +652,7 @@
         },
         {
           "position": 5,
-          "positionName": "上九",
+          "positionName": "六五",
           "yinYang": "阴",
           "symbol": "⚋",
           "isShi": false,
@@ -660,7 +660,7 @@
         },
         {
           "position": 6,
-          "positionName": "九6",
+          "positionName": "上九",
           "yinYang": "阳",
           "symbol": "⚊",
           "isShi": false,
@@ -701,55 +701,55 @@
     "lines": [
       {
         "position": 1,
-        "positionName": "九二",
+        "positionName": "初六",
         "yinYang": "阴",
-        "text": "包蒙吉；纳妇吉；子克家。",
-        "explanation": "此爻处于事情刚刚开始、力量尚未充分显现的阶段，阴爻显示此时应以柔顺承接为基本姿态。爻辞提示：总体趋向吉利。保持谦逊，认真求教，一问一答重在诚敬。",
+        "text": "发蒙，利用刑人，用说桎梏，以往吝。",
+        "explanation": "此爻处于事情刚刚开始、力量尚未充分显现的阶段，阴爻显示此时应以柔顺承接为基本姿态。爻辞提示：启蒙之初宜建立规矩，以适度惩戒纠正偏差，达到目的后应解除束缚；若一味用刑，则会招致困窘。保持谦逊，认真求教，一问一答重在诚敬。",
         "isShi": false,
         "isYing": true
       },
       {
         "position": 2,
-        "positionName": "六三",
+        "positionName": "九二",
         "yinYang": "阳",
-        "text": "勿用娶女；见金夫，不有躬，无攸利。",
-        "explanation": "此爻处于基础逐渐稳定、开始与外界建立联系的阶段，阳爻显示此时应以主动担当为基本姿态。爻辞提示：在符合条件时有利。宜暂缓外进，先稳定基础。",
+        "text": "包蒙吉；纳妇吉；子克家。",
+        "explanation": "此爻处于基础逐渐稳定、开始与外界建立联系的阶段，阳爻显示此时应以主动担当为基本姿态。爻辞提示：包容尚未开蒙者是吉利的，接纳配偶、成就家庭也是吉利的；子辈能够承担治家之责。宜以宽容教导、主动担当来稳定基础。",
         "isShi": false,
         "isYing": false
       },
       {
         "position": 3,
-        "positionName": "六四",
+        "positionName": "六三",
         "yinYang": "阴",
-        "text": "困蒙，吝。",
-        "explanation": "此爻处于由内向外转换、进退压力增大的阶段，阴爻显示此时应以柔顺承接为基本姿态。爻辞提示：局面可能窘迫，应收敛谨慎。保持谦逊，认真求教，一问一答重在诚敬。",
+        "text": "勿用娶女；见金夫，不有躬，无攸利。",
+        "explanation": "此爻处于由内向外转换、进退压力增大的阶段，阴爻显示此时应以柔顺承接为基本姿态。爻辞以婚配为戒：不可迎娶一见有财势之人便失去自持的人，如此结合并无益处。引申为处事宜守住原则，不因外在诱惑而失去判断。",
         "isShi": false,
         "isYing": false
       },
       {
         "position": 4,
-        "positionName": "六五",
+        "positionName": "六四",
         "yinYang": "阴",
-        "text": "童蒙，吉。",
-        "explanation": "此爻处于接近关键位置、需要判断进退的阶段，阴爻显示此时应以柔顺承接为基本姿态。爻辞提示：总体趋向吉利。保持谦逊，认真求教，一问一答重在诚敬。",
+        "text": "困蒙，吝。",
+        "explanation": "此爻处于接近关键位置、需要判断进退的阶段，阴爻显示此时应以柔顺承接为基本姿态。爻辞提示：困于蒙昧而不得启发，会陷入窘迫；宜主动求教，避免孤立自守。保持谦逊，认真求教，一问一答重在诚敬。",
         "isShi": true,
         "isYing": false
       },
       {
         "position": 5,
-        "positionName": "上九",
+        "positionName": "六五",
         "yinYang": "阴",
-        "text": "击蒙；不利为寇，利御寇。",
-        "explanation": "此爻处于居于核心位置、能够发挥主导作用的阶段，阴爻显示此时应以柔顺承接为基本姿态。爻辞提示：在符合条件时有利。保持谦逊，认真求教，一问一答重在诚敬。",
+        "text": "童蒙，吉。",
+        "explanation": "此爻处于居于核心位置、能够发挥主导作用的阶段，阴爻显示此时应以柔顺承接为基本姿态。爻辞提示：像孩童一样虚心受教，能获得吉利。保持谦逊，认真求教，一问一答重在诚敬。",
         "isShi": false,
         "isYing": false
       },
       {
         "position": 6,
-        "positionName": "九6",
+        "positionName": "上九",
         "yinYang": "阳",
-        "text": "",
-        "explanation": "此爻处于发展达到极点、必须防止过度的阶段，阳爻显示此时应以主动担当为基本姿态。爻辞提示：吉凶取决于是否合乎时位与正道。保持谦逊，认真求教，一问一答重在诚敬。",
+        "text": "击蒙；不利为寇，利御寇。",
+        "explanation": "此爻处于发展达到极点、必须防止过度的阶段，阳爻显示此时应以主动担当为基本姿态。爻辞提示：纠正蒙昧可以严正，但不宜借此侵害他人；有利的是防御侵扰、止恶守正。施教与纠偏都应有分寸。",
         "isShi": false,
         "isYing": false
       }
