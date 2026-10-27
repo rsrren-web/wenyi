@@ -104,10 +104,10 @@ export default function HexagramDetail() {
             § 1  情势研判 + 宜忌
         ══════════════════════════════════════════ */}
         <div id="situation" className="scroll-mt-24 space-y-6">
-          <SectionTitle label={hexagram.duanyiTianji ? "情势研判" : "宜 · 忌"} />
-          {hexagram.duanyiTianji && <p className="text-lg leading-loose text-foreground/90 tracking-wide">
+          <SectionTitle label="情势研判" />
+          <p className="text-lg leading-loose text-foreground/90 tracking-wide">
             {hexagram.duanyiTianji}
-          </p>}
+          </p>
           {(ext.advice || ext.warning) && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
               {ext.advice && (
@@ -151,24 +151,24 @@ export default function HexagramDetail() {
                 ))}
               </div>
             )}
-            {hexagram.folkJudgment && <div className="p-5 border border-border bg-card">
+            <div className="p-5 border border-border bg-card">
               <FieldLabel label="民间断语" />
               <p className="text-base leading-relaxed text-foreground/85 tracking-wide mt-2">
                 {hexagram.folkJudgment}
               </p>
-            </div>}
+            </div>
           </div>
         </div>
 
         {/* ══════════════════════════════════════════
             § 3  综合解读
         ══════════════════════════════════════════ */}
-        {hexagram.explanation && <div id="interpretation" className="scroll-mt-24 space-y-4">
+        <div id="interpretation" className="scroll-mt-24 space-y-4">
           <SectionTitle label="综合解读" />
           <p className="text-base leading-loose text-foreground/80 tracking-wide">
             {hexagram.explanation}
           </p>
-        </div>}
+        </div>
 
         {/* ══════════════════════════════════════════
             § 4  图像专区  ——  全宽双列
@@ -272,9 +272,9 @@ export default function HexagramDetail() {
         </div>
       </motion.div>
       <ReadingNav items={[
-        { id: "situation", label: hexagram.duanyiTianji ? "情势研判" : "宜忌" },
+        { id: "situation", label: "情势研判" },
         { id: "classics", label: "经典文本" },
-        ...(hexagram.explanation ? [{ id: "interpretation", label: "综合解读" }] : []),
+        { id: "interpretation", label: "综合解读" },
         { id: "image", label: "图像" },
         { id: "lines", label: "爻位" },
         { id: "related", label: "关联卦象" },
