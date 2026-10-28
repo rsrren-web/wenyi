@@ -44,7 +44,7 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
   ];
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-5 py-12 xl:max-w-[76rem] xl:pl-8 xl:pr-64">
+    <div className="hexagram-reading mx-auto w-full max-w-4xl px-5 py-12 xl:max-w-[76rem] xl:pl-8 xl:pr-64">
       {/* Breadcrumbs */}
       <nav aria-label="面包屑" className="flex flex-wrap items-center text-sm text-foreground/50 tracking-widest mb-12">
         <Link href="/" className="hover:text-primary transition-colors">首页</Link>
@@ -62,8 +62,8 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
       >
         {question && (
           <section aria-label="所问之事" className="break-words border-b border-border pb-8">
-            <div className="mb-3 text-xs tracking-[0.4em] text-foreground/50">所问之事</div>
-            <h2 className="text-xl font-light tracking-wider text-white">「{question}」</h2>
+            <div className="reading-label mb-3 text-foreground/50">所问之事</div>
+            <h2 className="reading-question text-white">「{question}」</h2>
           </section>
         )}
         {/* ══════════════════════════════════════════
@@ -77,7 +77,7 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
                 {hexagram.symbol}
               </div>
               <div>
-                <h1 className="text-3xl sm:text-4xl font-light tracking-[0.2em] text-white mb-2">
+                <h1 className="text-3xl sm:text-4xl font-medium tracking-[0.08em] leading-snug text-white mb-2">
                   {hexagram.name}卦
                 </h1>
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm tracking-widest text-foreground/60 mb-2">
@@ -111,13 +111,13 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
               {ext.advice && (
                 <div className="p-5 border border-primary/30 bg-primary/5">
-                  <div className="text-xs tracking-[0.35em] text-primary uppercase mb-3">宜</div>
+                  <div className="reading-label text-primary mb-3">宜</div>
                   <p className="text-base text-foreground/85 leading-relaxed">{ext.advice}</p>
                 </div>
               )}
               {ext.warning && (
                 <div className="p-5 border border-border bg-muted/30">
-                  <div className="text-xs tracking-[0.35em] text-foreground/65 uppercase mb-3">忌</div>
+                  <div className="reading-label text-foreground/65 mb-3">忌</div>
                   <p className="text-base text-foreground/80 leading-relaxed">{ext.warning}</p>
                 </div>
               )}
@@ -133,24 +133,24 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
           <div className="space-y-8">
             {hexagram.guaci && <div>
               <FieldLabel label="卦辞" />
-              <p className="text-xl font-light leading-relaxed text-white tracking-wider mt-2">
+              <p className="reading-judgment text-white mt-2">
                 {hexagram.guaci}
               </p>
             </div>}
             {hexagram.tuan && <div>
               <FieldLabel label="彖传" />
-              <p className="text-lg leading-loose text-foreground/90 tracking-wide mt-2">{hexagram.tuan}</p>
+              <p className="reading-original text-foreground/90 mt-2">{hexagram.tuan}</p>
             </div>}
             {hexagram.xiangci && <div>
               <FieldLabel label="大象" />
-              <p className="text-lg leading-relaxed text-foreground/90 tracking-wide mt-2">
+              <p className="reading-original text-foreground/90 mt-2">
                 {hexagram.xiangci}
               </p>
             </div>}
             {hexagram.poem && (
               <div className="py-5 border-y border-border/50 text-center space-y-1.5">
                 {hexagram.poem.split('\n').map((line, i) => (
-                  <p key={i} className="text-base tracking-[0.45em] text-foreground/70">{line}</p>
+                  <p key={i} className="reading-poem text-foreground/70">{line}</p>
                 ))}
               </div>
             )}
@@ -184,7 +184,7 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
               {/* 左列 — 《天纪》卦图 */}
               {hasImage && (
                 <div className="flex flex-col items-center justify-start p-7 border-b lg:border-b-0 lg:border-r border-border bg-card/50">
-                  <div className="text-[10px] tracking-[0.45em] text-foreground/50 uppercase mb-5 self-start">
+                  <div className="reading-label text-foreground/50 mb-5 self-start">
                     《天纪》卦图
                   </div>
                   <HexagramImage
@@ -200,7 +200,7 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
                 <div className={`flex flex-col p-7 gap-8 ${!hasImage ? 'lg:col-span-2' : ''}`}>
                   {hasExplanation && (
                     <div>
-                      <div className="text-[10px] tracking-[0.45em] text-primary/75 uppercase mb-4">
+                      <div className="reading-label text-primary/75 mb-4">
                         图象解说
                       </div>
                       <div className="space-y-3">
@@ -214,7 +214,7 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
                   )}
                   {hasTuchen && (
                     <div className={hasExplanation ? 'pt-6 border-t border-border/50' : ''}>
-                      <div className="text-[10px] tracking-[0.45em] text-foreground/50 uppercase mb-4">
+                      <div className="reading-label text-foreground/50 mb-4">
                         图谶参考
                       </div>
                       <p className="text-sm leading-relaxed text-foreground/65 italic tracking-wide">
@@ -235,7 +235,7 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
           <SectionTitle label="爻位详表" />
           <YaoLinesDetail lines={hexagram.lines} />
           {hexagram.specialLine && <section aria-label={hexagram.specialLine.name} className="space-y-4 border border-primary/30 bg-card p-5">
-            <h3 className="text-lg text-primary">{hexagram.specialLine.name}</h3>
+            <h3 className="reading-special-title text-primary">{hexagram.specialLine.name}</h3>
             <p className="text-base leading-loose text-white">{hexagram.specialLine.text}</p>
             <div><FieldLabel label="小象" /><p className="mt-2 text-base leading-relaxed text-foreground/90">{hexagram.specialLine.xiang}</p></div>
             <div><FieldLabel label="白话解" /><p className="mt-2 text-base leading-relaxed text-foreground/85">{hexagram.specialLine.explanation}</p></div>
@@ -286,13 +286,13 @@ function SectionTitle({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3">
       <span className="w-5 h-px bg-primary/60" />
-      <span className="text-xs tracking-[0.3em] text-primary/80 uppercase">{label}</span>
+      <h2 className="reading-section-title text-primary/80">{label}</h2>
     </div>
   );
 }
 
 function FieldLabel({ label }: { label: string }) {
   return (
-    <span className="text-[10px] tracking-[0.35em] text-foreground/50 uppercase">{label}</span>
+    <span className="reading-label text-foreground/50">{label}</span>
   );
 }

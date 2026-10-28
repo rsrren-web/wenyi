@@ -176,6 +176,72 @@
   }
 }
 
+/* Detail-page reading hierarchy only. Navigation, homepage, cards and layout
+   retain their existing styling. All values scale with the root font size. */
+.hexagram-reading .reading-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+}
+
+.hexagram-reading .reading-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
+
+.hexagram-reading #situation p,
+.hexagram-reading #interpretation p,
+.hexagram-reading #image p,
+.hexagram-reading #lines p,
+.hexagram-reading #lines tbody td:last-child,
+.hexagram-reading #related p,
+.hexagram-reading #classics p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.95;
+  letter-spacing: normal;
+  font-style: normal;
+  overflow-wrap: break-word;
+}
+
+.hexagram-reading #classics p.reading-original,
+.hexagram-reading #lines tbody td:nth-child(4) > p,
+.hexagram-reading #lines .space-y-4 > div:first-child > p {
+  font-size: 1.125rem;
+}
+
+.hexagram-reading #classics p.reading-judgment,
+.hexagram-reading .reading-question {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+}
+
+.hexagram-reading #classics p.reading-poem {
+  letter-spacing: 0.08em;
+}
+
+.hexagram-reading .reading-special-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+.hexagram-reading #lines thead {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 768px) {
+  .hexagram-reading .reading-section-title { font-size: 1.375rem; }
+}
+
 /* Hexagram Unicode symbols */
 .hexagram-symbol {
   font-family: 'Noto Sans', 'Noto Sans SC', sans-serif;

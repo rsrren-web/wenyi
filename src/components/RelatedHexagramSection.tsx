@@ -83,13 +83,13 @@ function RelatedCard({
 
                   {/* Guaci */}
                   <div>
-                    <div className="text-[10px] tracking-[0.3em] text-primary/40 mb-2 uppercase">卦辞</div>
+                    <div className="reading-label text-primary/40 mb-2">卦辞</div>
                     <p className="text-sm leading-relaxed text-foreground/70">{hexagram.guaci}</p>
                   </div>
 
                   {/* Xiangci */}
                   <div>
-                    <div className="text-[10px] tracking-[0.3em] text-primary/40 mb-2 uppercase">象辞</div>
+                    <div className="reading-label text-primary/40 mb-2">象辞</div>
                     <p className="text-sm leading-relaxed text-foreground/70">{hexagram.xiangci}</p>
                   </div>
                 </div>
@@ -101,7 +101,7 @@ function RelatedCard({
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {(hexagram as unknown as { coreMeaning?: string }).coreMeaning && (
                       <div className="bg-muted/50 p-4">
-                        <div className="text-[10px] tracking-[0.3em] text-primary/40 mb-1.5 uppercase">核心</div>
+                        <div className="reading-label text-primary/40 mb-1.5">核心</div>
                         <p className="text-xs text-foreground/60 leading-relaxed">
                           {(hexagram as unknown as { coreMeaning?: string }).coreMeaning}
                         </p>
@@ -109,7 +109,7 @@ function RelatedCard({
                     )}
                     {(hexagram as unknown as { advice?: string }).advice && (
                       <div className="bg-muted/50 p-4">
-                        <div className="text-[10px] tracking-[0.3em] text-primary/40 mb-1.5 uppercase">宜</div>
+                        <div className="reading-label text-primary/40 mb-1.5">宜</div>
                         <p className="text-xs text-foreground/60 leading-relaxed">
                           {(hexagram as unknown as { advice?: string }).advice}
                         </p>
@@ -117,7 +117,7 @@ function RelatedCard({
                     )}
                     {(hexagram as unknown as { warning?: string }).warning && (
                       <div className="bg-muted/50 p-4">
-                        <div className="text-[10px] tracking-[0.3em] text-primary/40 mb-1.5 uppercase">忌</div>
+                        <div className="reading-label text-primary/40 mb-1.5">忌</div>
                         <p className="text-xs text-foreground/60 leading-relaxed">
                           {(hexagram as unknown as { warning?: string }).warning}
                         </p>
@@ -149,7 +149,7 @@ function RelatedCard({
 export function RelatedHexagramSection({ mutual, opposite, reversed }: RelatedHexagramSectionProps) {
   return (
     <div className="space-y-3">
-      <h3 className="text-xs tracking-[0.3em] text-foreground/30 uppercase mb-4">关联卦象</h3>
+      <h2 className="reading-section-title text-foreground/30 mb-4">关联卦象</h2>
       <RelatedCard
         label="互卦"
         desc="取中间四爻重组，揭示事物内在发展"
