@@ -1,6 +1,8 @@
 declare module 'lunar-javascript' {
   export class Solar {
     static fromDate(date: Date): Solar;
+    static fromYmdHms(year: number, month: number, day: number, hour: number, minute: number, second: number): Solar;
+    getLunar(): Lunar;
     getYear(): number;
     getMonth(): number;
     getDay(): number;
@@ -10,5 +12,13 @@ declare module 'lunar-javascript' {
     getYearInGanZhi(): string;
     getMonthInChinese(): string;
     getDayInChinese(): string;
+    getEightChar(): EightChar;
+  }
+  export class EightChar {
+    setSect(sect: number): void;
+    getYear(): string;
+    getMonth(): string;
+    getDay(): string;
+    getTime(): string;
   }
 }

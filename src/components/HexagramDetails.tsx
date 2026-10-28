@@ -137,8 +137,12 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
                 {hexagram.guaci}
               </p>
             </div>}
+            {hexagram.tuan && <div>
+              <FieldLabel label="彖传" />
+              <p className="text-lg leading-loose text-foreground/90 tracking-wide mt-2">{hexagram.tuan}</p>
+            </div>}
             {hexagram.xiangci && <div>
-              <FieldLabel label="象辞" />
+              <FieldLabel label="大象" />
               <p className="text-lg leading-relaxed text-foreground/90 tracking-wide mt-2">
                 {hexagram.xiangci}
               </p>
@@ -230,6 +234,13 @@ function HexagramDetailsContent({ hexagram, question, actions }: HexagramDetails
         <div id="lines" className="scroll-mt-24 space-y-4">
           <SectionTitle label="爻位详表" />
           <YaoLinesDetail lines={hexagram.lines} />
+          {hexagram.specialLine && <section aria-label={hexagram.specialLine.name} className="space-y-4 border border-primary/30 bg-card p-5">
+            <h3 className="text-lg text-primary">{hexagram.specialLine.name}</h3>
+            <p className="text-base leading-loose text-white">{hexagram.specialLine.text}</p>
+            <div><FieldLabel label="小象" /><p className="mt-2 text-base leading-relaxed text-foreground/90">{hexagram.specialLine.xiang}</p></div>
+            <div><FieldLabel label="白话解" /><p className="mt-2 text-base leading-relaxed text-foreground/85">{hexagram.specialLine.explanation}</p></div>
+            <p className="text-sm leading-relaxed text-foreground/75">这是{hexagram.name}卦的特别辞，不属于六个爻位中的第七爻。</p>
+          </section>}
         </div>
 
         {/* ══════════════════════════════════════════

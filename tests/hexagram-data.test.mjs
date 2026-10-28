@@ -46,3 +46,57 @@ test('Meng retains its missing-first-line correction and all six original lines 
     ['上九', '击蒙；不利为寇，利御寇。'],
   ]);
 });
+
+test('all 64 彖传, 384 小象 and two special lines are present without placeholder glyphs', () => {
+  let smallImages = 0;
+  const interpretations = new Set();
+  for (const [id, h] of Object.entries(data)) {
+    assert.ok(h.tuan.length > 20, `${id}: 彖传`);
+    const originals = [h.judgment.original, h.imageText.original, h.tuan];
+    for (const line of h.lines) {
+      assert.ok(line.xiang.length >= 6, `${id}: 小象 ${line.position}`);
+      originals.push(line.text, line.xiang);
+      interpretations.add(line.explanation);
+      assert.doesNotMatch(line.explanation, /此爻处于|爻辞提示/);
+      smallImages++;
+    }
+    for (const text of originals) assert.doesNotMatch(text, /[\uE000-\uF8FF□�]|一作|variant-tooltip/);
+    assert.doesNotMatch(h.detailedInterpretation.situation, /应先判断自己处于六爻/);
+    assert.doesNotMatch(h.detailedInterpretation.summary, /关键不在机械判断/);
+  }
+  assert.equal(smallImages, 384);
+  assert.equal(interpretations.size, 384, 'no repeated template interpretations');
+  assert.deepEqual(Object.entries(data).filter(([, h]) => h.specialLine).map(([id]) => id).sort(), ['01', '02']);
+  for (const id of ['01','02']) {
+    assert.ok(data[id].specialLine.xiang);
+    assert.equal(data[id].lines.length, 6, 'special text is not a seventh line');
+    assert.equal(data[id].yaoDiagram.lines.length, 6);
+  }
+});
+
+test('confirmed classical corrections stay fixed', () => {
+  assert.equal(data['17'].judgment.original.replace(/[\s，。；]/g, ''), '元亨利贞无咎');
+  assert.match(data['17'].imageText.original, /向晦入宴息/);
+  assert.match(data['04'].judgment.original, /初筮告/);
+  assert.match(data['03'].lines[3].text, /往吉/);
+  assert.match(data['16'].imageText.original, /殷荐之上帝，以配祖考/);
+  assert.equal(data['26'].lines[1].text, '舆说輹。');
+  assert.match(data['26'].lines[3].text, /童牛/);
+  assert.match(data['48'].lines[5].text, /有孚元吉/);
+  assert.match(data['53'].lines[1].text, /衎衎/);
+  assert.match(data['57'].lines[1].text, /床下/);
+  assert.match(data['29'].tuan, /险之时用大矣哉/);
+  assert.doesNotMatch(data['10'].tuan, /亨，利贞/);
+  assert.match(data['22'].tuan, /刚柔交错/);
+  assert.match(data['61'].lines[2].xiang, /或鼓或罢/);
+});
+
+test('negative and ritual readings are not reduced to character-based fortune templates', () => {
+  for (const [id, index] of [['19',2],['25',5],['27',2],['32',0],['34',5],['45',2],['54',5]]) {
+    assert.match(data[id].lines[index].explanation, /没有好处|没有实际|没有好|无所利/);
+  }
+  assert.match(data['44'].lines[1].explanation, /不宜.*宾客/);
+  assert.match(data['17'].lines[5].explanation, /祭享/);
+  assert.match(data['46'].lines[3].explanation, /祭享/);
+  assert.match(data['32'].lines[1].explanation, /悔恨.*消失/);
+});

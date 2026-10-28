@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Solar, Lunar } from "lunar-javascript";
-
-const TIANGAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
-const DIZHI   = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+import { getBeijingPillars } from "../lib/calendar";
 
 const shichenMap = [
   { name: "子时", time: "23:00-01:00", element: "水", dizhi: "子" },
@@ -19,17 +17,6 @@ const shichenMap = [
   { name: "亥时", time: "21:00-23:00", element: "水", dizhi: "亥" },
 ];
 
-/** 根据日天干和时辰序号推算时柱干支 */
-function calcHourGanZhi(shichenIndex: number, dayGanZhi: string): string {
-  const dayGan = dayGanZhi[0];
-  const dayGanIdx = TIANGAN.indexOf(dayGan);
-  if (dayGanIdx === -1) return '';
-  // 甲己→甲 乙庚→丙 丙辛→戊 丁壬→庚 戊癸→壬
-  const startStems = [0, 2, 4, 6, 8, 0, 2, 4, 6, 8];
-  const hourGanIdx = (startStems[dayGanIdx] + shichenIndex) % 10;
-  return TIANGAN[hourGanIdx] + DIZHI[shichenIndex];
-}
-
 interface Props {
   compact?: boolean;
 }
@@ -43,10 +30,7 @@ export function DateTimePanel({ compact = false }: Props) {
   }, []);
 
   const solar = Solar.fromDate(now);
-  const lunar = Lunar.fromDate(now) as ReturnType<typeof Lunar.fromDate> & {
-    getMonthInGanZhi(): string;
-    getDayInGanZhi(): string;
-  };
+  const lunar = Lunar.fromDate(now);
 
   const solarStr   = `${solar.getYear()}年${solar.getMonth()}月${solar.getDay()}日`;
   const lunarStr   = `${lunar.getYearInGanZhi()}年 ${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`;
@@ -56,15 +40,12 @@ export function DateTimePanel({ compact = false }: Props) {
   const shichenIndex  = Math.floor((hour + 1) / 2) % 12;
   const currentShichen = shichenMap[shichenIndex];
 
-  // 四柱
-  const yearZhu  = lunar.getYearInGanZhi();
-  const monthZhu = lunar.getMonthInGanZhi?.() ?? '';
-  const dayZhu   = lunar.getDayInGanZhi?.()   ?? '';
-  const hourZhu  = dayZhu ? calcHourGanZhi(shichenIndex, dayZhu) : '';
+  const pillars = getBeijingPillars(now);
 
   if (compact) {
     return (
       <div className="border-b border-border px-4 py-3 text-foreground/70">
+        <div className="mb-1 text-xs text-foreground/70">设备当地时间</div>
         <div className="flex items-baseline justify-between gap-4">
           <span className="text-xl font-light tracking-widest text-primary tabular-nums whitespace-nowrap">
             {timeStr}
@@ -92,7 +73,7 @@ export function DateTimePanel({ compact = false }: Props) {
 
         {/* 阳历 + 时间 */}
         <div className="space-y-2">
-          <div className="text-xs tracking-[0.35em] text-foreground/55 uppercase">阳历</div>
+          <div className="text-xs tracking-[0.2em] text-foreground/75">阳历 · 设备当地时间</div>
           <div className="text-base tracking-wide text-foreground/75">{solarStr}</div>
           <div className="text-3xl font-light tracking-widest text-primary tabular-nums">{timeStr}</div>
         </div>
@@ -121,13 +102,14 @@ export function DateTimePanel({ compact = false }: Props) {
 
         {/* 四柱 */}
         <div className="space-y-3">
-          <div className="text-xs tracking-[0.35em] text-foreground/55 uppercase">四柱干支</div>
+          <div className="text-xs tracking-[0.2em] text-foreground/80">四柱干支 · 北京时间</div>
+          <div className="text-xs text-foreground/75 tabular-nums">{pillars.date} {pillars.time}（UTC+8）</div>
           <div className="grid grid-cols-4 gap-2">
             {[
-              { label: '年', value: yearZhu  },
-              { label: '月', value: monthZhu },
-              { label: '日', value: dayZhu   },
-              { label: '时', value: hourZhu  },
+              { label: '年', value: pillars.year },
+              { label: '月', value: pillars.month },
+              { label: '日', value: pillars.day },
+              { label: '时', value: pillars.hour },
             ].map(({ label, value }) => (
               <div key={label} className="flex flex-col items-center gap-1.5 py-3 border border-border bg-card/50">
                 <span className="text-[10px] tracking-[0.25em] text-foreground/45">{label}</span>
@@ -140,6 +122,7 @@ export function DateTimePanel({ compact = false }: Props) {
               </div>
             ))}
           </div>
+          <p className="text-xs leading-relaxed text-foreground/75">按立春交接换年、节交接换月，23:00 子初换日；不作真太阳时校正。</p>
         </div>
 
       </div>

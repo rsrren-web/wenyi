@@ -5,6 +5,7 @@ import hexagramDataRaw from './hexagrams.json';
 import guaImageExplanationRaw from './gua-image-explanation.json';
 
 interface JsonLine {
+  xiang: string;
   position: number;
   positionName: string;
   yinYang: string;
@@ -26,6 +27,8 @@ interface JsonHexagram {
   palaceLevel: string;
   judgment: { original: string; explanation: string };
   imageText: { original: string; explanation: string };
+  tuan: string;
+  specialLine?: { positionName: string; text: string; explanation: string; xiang: string };
   folkJudgment: { text: string };
   shijue: { text: string; explanation: string };
   tuchen: { text: string; explanation: string[] };
@@ -50,6 +53,7 @@ const guaImageExplanation = guaImageExplanationRaw as Record<string, { guaImageE
 // ─── Public types ───────────────────────────────────────────────────────────
 
 export interface ProcessedYao {
+  xiang: string;
   position: number;
   name: string;
   isShiYao: boolean;
@@ -72,6 +76,8 @@ export interface ProcessedHexagram {
   palaceLevel: string;
   guaci: string;
   xiangci: string;
+  tuan: string;
+  specialLine?: { name: string; text: string; explanation: string; xiang: string };
   folkJudgment: string;
   duanyiTianji: string;
   poem: string;
@@ -114,6 +120,7 @@ function buildAll(): ProcessedHexagram[] {
       isYang: line.yinYang === '阳',
       text: line.text,
       explanation: line.explanation,
+      xiang: line.xiang,
     }));
 
     return {
@@ -129,6 +136,13 @@ function buildAll(): ProcessedHexagram[] {
       palaceLevel: json.palaceLevel,
       guaci: json.judgment?.original ?? '',
       xiangci: json.imageText?.original ?? '',
+      tuan: json.tuan,
+      specialLine: json.specialLine ? {
+        name: json.specialLine.positionName,
+        text: json.specialLine.text,
+        explanation: json.specialLine.explanation,
+        xiang: json.specialLine.xiang,
+      } : undefined,
       folkJudgment: json.folkJudgment?.text ?? '',
       duanyiTianji: json.detailedInterpretation?.situation ?? '',
       poem: json.shijue?.text ?? '',
